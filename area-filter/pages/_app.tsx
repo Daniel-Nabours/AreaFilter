@@ -1,5 +1,5 @@
-import type { AppProps } from "next/app"; 
-import '/leaflet/leaflet.module.css'
+import type { AppProps } from "next/app";  
+import "../public/leaflet.css"
 
 
 function MyApp({ Component, pageProps }: AppProps) {

@@ -1,16 +1,20 @@
-import { Html, Head, Main, NextScript } from "next/document";
+import { Html, Head, Main, NextScript } from "next/document"
+import Script from "next/script" 
 
 export default function Document() {
   return (
     <Html>
       <Head>
-        <link rel="stylesheet" href="/leaflet/leaflet.module.css" />
-        <script src="/leaflet/leaflet.js"></script>
+        <Script
+          src={"/public/leaflet.js"}
+          strategy="lazyOnload"
+          onError={() => { console.log("script failed to load") }}
+        />
       </Head>
       <body>
         <Main />
         <NextScript />
       </body>
     </Html>
-  );
+  )
 }
