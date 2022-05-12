@@ -7,8 +7,7 @@ export default function Document() {
       <Head>
         <Script
           src={"/public/leaflet.js"}
-          strategy="lazyOnload"
-          onError={() => { console.log("script failed to load") }}
+          strategy="lazyOnload" 
         />
       </Head>
       <body>

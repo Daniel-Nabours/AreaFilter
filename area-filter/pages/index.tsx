@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import { useEffect, useState } from "react";
-import dynamic from "next/dynamic" 
-import Script from "next/script"
+import dynamic from "next/dynamic"  
  
 const LeafletMap = dynamic(
   //@ts-ignore
@@ -10,10 +9,10 @@ const LeafletMap = dynamic(
 )
 
 const Home: NextPage = () => {
+
   
   return (
-    <div id="map">
-      <Script src="leaflet/dist/leaflet.js"/>
+    <div id="map"> 
       <LeafletMap />
     </div>
   );

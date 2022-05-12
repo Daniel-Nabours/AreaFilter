@@ -1,4 +1,7 @@
 /* required styles */
+.sr-only {
+	display: none;
+}
 
 .leaflet-pane,
 .leaflet-tile,
