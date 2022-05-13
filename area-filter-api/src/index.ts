@@ -1,11 +1,12 @@
 import express from "express"
-import dotenv from "dotenv" 
-import { createBounds , deleteBounds, updateBounds} from "./queries"
+import { config } from "dotenv"
+import { createBounds, deleteBounds, updateBounds } from "./queries"
 
-dotenv.config();
+config()
 
-const app = express();
-const port = 8000; 
+//@ts-ignore
+const app = express()
+const port = 8000
 
 app.post("/bounds", createBounds)
 app.delete("/bounds/:id", deleteBounds)
