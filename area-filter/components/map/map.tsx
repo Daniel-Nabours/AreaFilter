@@ -2,8 +2,8 @@ import React from "react"
 import { Map, TileLayer, FeatureGroup } from "react-leaflet"
 
 //@ts-ignore
-import { EditControl } from "react-leaflet-draw"
-import type { LatLngExpression, LatLng, LocationEvent } from "leaflet"
+import { EditControl,  } from "react-leaflet-draw"
+import type { LatLngExpression, LatLng, LocationEvent, LayerEvent } from "leaflet"
 
 
 type MapConfigTypes = {
@@ -15,17 +15,27 @@ type MapConfigTypes = {
 const LeafletMap = () => {
  
 
-  const onChange = (e: LocationEvent) => {   
+  const onCreate = (e: LocationEvent) => {   
     let vertices: LatLng[] = e.layer._latlngs[0]
     let arrVertices = vertices.map(vertex => [vertex.lat, vertex.lng])
-    alert(`${arrVertices[0]}, ${arrVertices[2]}`)
+    alert(`Created: ${arrVertices[0]}, ${arrVertices[2]}`)
+    //if (!FGRef ) return
+    //FGRef.leafletElement.toGeoJSON()
+  }
+  const onEdit = (e: any) => {   
+    e.layers.eachLayer(a => {
+      console.log(a.toGeoJSON())
+    })
+    let vertices: LatLng[] = e. layer._latlngs[0]
+    let arrVertices = vertices.map(vertex => [vertex.lat, vertex.lng])
+    alert(`Edited: ${arrVertices[0]}, ${arrVertices[2]}`)
     //if (!FGRef ) return
     //FGRef.leafletElement.toGeoJSON()
   }
 
   const mapConfig: MapConfigTypes = {
     center: [36.1, -115.1],
-    zoom: 13,
+    zoom: 8,
     scrollWheelZoom: true,
     style: {
       height: "1000px"
@@ -42,8 +52,8 @@ const LeafletMap = () => {
       <FeatureGroup>
         <EditControl
           position="topright"
-          onEdited={onChange}
-          onCreated={onChange}
+          onEdited={onEdit}
+          onCreated={onCreate} 
           draw={{
             polyline: false,
             polygon: false,
