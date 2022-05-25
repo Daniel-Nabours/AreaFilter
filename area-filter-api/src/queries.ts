@@ -5,10 +5,14 @@ const pool = new Pool()
 
 const createBounds = (req: Request, res: Response) => {
   
-  var {name, upperleft, lowerright} = req.body
-
-  pool.query(`INSERT INTO areafilters (name, upperleft, lowerright) VALUES ($1,$2,$3)`,
-    [name, upperleft, lowerright],
+  console.log(req.body)
+  var { name, vertices } = req.body
+  const objVertices = {
+    value: vertices
+  }
+ 
+  pool.query(`INSERT INTO area_filters (name, vertices) VALUES ($1,$2)`,
+    [name, objVertices],
     (error: Error, result: QueryResult<any>) => {
     if (error) {
       console.error(error)
@@ -21,9 +25,9 @@ const createBounds = (req: Request, res: Response) => {
 }
 
 const deleteBounds = (req: Request, res: Response) => {
-  let id = req.params.id
-  pool.query(`DELETE FROM areafilters * WHERE id = $1`,
-    [id],
+  let filterID = req.params.id; 
+  pool.query(`DELETE FROM area_filters * WHERE filterID = $1`,
+    [filterID],
     (error: Error, result: QueryResult<any>) => {
     if (error) {
       console.error(error)
@@ -36,10 +40,13 @@ const deleteBounds = (req: Request, res: Response) => {
 }
 
 const updateBounds = (req: Request, res: Response) => { 
-  let id = req.params.id
-  var { name, upperleft, lowerright } = req.body
-  pool.query(`UPDATE areafilters SET name=$1, upperleft=$2, lowerright=$3 WHERE id=$4`,
-    [name, upperleft, lowerright, id],
+  let filterID = req.params.id
+  var { name, vertices } = req.body
+  const objVertices = {
+    value: vertices
+  }
+  pool.query(`UPDATE area_filters SET name=$1, vertices=$2, WHERE filterID=$3`,
+    [name, objVertices, filterID],
     (error: Error, result: QueryResult<any>) => {
     if (error) {
       console.error(error)
